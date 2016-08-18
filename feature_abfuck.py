@@ -74,7 +74,7 @@ def keyword_binary_po(sent):
 				po_bin = 1
 		return po_bin
 
-def keyword_count_eo(sent): #NOCH NORMALISIEREN
+def keyword_count_eo(sent):
 	with open("keywords_eo.txt", "r") as f_in:
 		eo_count = 0
 		f_string = f_in.read()
@@ -86,7 +86,7 @@ def keyword_count_eo(sent): #NOCH NORMALISIEREN
 		norm_eo_count = eo_count / float(sents_l)
 		return norm_eo_count
 
-def keyword_count_po(sent): #NOCH NORMALISIEREN
+def keyword_count_po(sent):
 	with open("keywords_po.txt", "r") as f_in:
 		po_count = 0
 		f_string = f_in.read()
