@@ -109,7 +109,23 @@ def adverb(sent):
 
  #fremdwoerter
 
- #def is_subject_pronomen???
+def is_subject_pronomen(sent):
+        pronomen = ['I', 'You', 'He', 'She', 'It', 'We', 'They', 'i', 'you', 'he', 'she', 'it', 'we', 'they']
+        NP = []
+        sub_is_pron = 0
+
+        for token in sent['parse']:
+                if re.search(r'NP', token):
+                        NP.append(token[3])#welcher index??? wo steht das im dict??
+        for element in NP:
+                if element in pronomen:
+                        sub_is_pron = 1
+                        
+                                        
+                     
+        return sub_is_pron
+
+#was ist mit it?
 
 def iob_eo(sent):
 	iob_eo_bin = 0
@@ -126,7 +142,22 @@ def iob_po(sent):
  	return iob_po_bin
 
 
- #def pronomen im singular oder plural?
+def pronomen_pl_sing(sent):
+        pronomen_sing = ['I', 'He', 'She', 'It', 'i', 'he', 'she', 'it']
+        pronomen_pl = ['We', 'They', 'we', 'they']
+        NP = []
+        sing = 0
+        pl = 0
+        
+        for token in sent['parse']:
+                if re.search(r'NP', token):
+                        NP.append(token[4])#welcher index??
+        for element in NP:
+                if element in pronomen_sing:
+                        sing = 1
+                if element in pronomwn_pl:
+                        pl = 1
+        return sing, pl #nicht gut, zwei ergebnise als ein eintrag
 
 
 
@@ -166,8 +197,10 @@ def main():
 			feature_values.append(keyword_binary_po(sent))
 			feature_values.append(keyword_count_eo(sent))
 			feature_values.append(keyword_count_po(sent))
+			feature_values.append(is_subject_pronomen(sent))
 			feature_values.append(iob_eo(sent))
 			feature_values.append(iob_po(sent))
+			feature_values.append(pronomen_pl_sing(sent))
 
 
 			feature_result.append(feature_values)
